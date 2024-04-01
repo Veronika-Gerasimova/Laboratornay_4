@@ -8,31 +8,92 @@ namespace Laboratornay_4
 {
     public class Plants
     {
+        public static Random rnd = new Random();
+        public int height = 0;
+        //virtual для того чтобы функцию можно было переопределить
+        // в классах наследниках
+        public virtual String GetInfo()
+        {
+            var str = String.Format("\nВысота: {0}", this.height);
+            return str;
+        }
     }
-    public enum FlowersType { type1, type2 };
-    public enum FlowersColors { black, white, red, yellow, blue, green }
+    public enum FlowersType { домашние, полевые };
+    public enum FlowersColors { чёрный, белый, красный, желтый, голубой, зеленый }
     //Цветы
     public class Flowers : Plants
     {
-        public FlowersType type = FlowersType.type1;
+        public FlowersType type = FlowersType.домашние;
         public int numberOfPetals = 0;
-        public FlowersColors colors = FlowersColors.black;
+        public FlowersColors colors = FlowersColors.чёрный;
 
+        public override String GetInfo()
+        {
+            var str = "Я цветок";
+            str += base.GetInfo();
+            str += String.Format("\nТип цветов: {0}", this.type);
+            str += String.Format("\nЦвет: {0}", this.colors);
+            str += String.Format("\nКол-во лепестков: {0}", this.numberOfPetals);
+            return str;
+        }
+
+        public static Flowers Generate()
+        {
+            return new Flowers
+            {
+                colors = (FlowersColors)rnd.Next(0, Enum.GetValues(typeof(FlowersColors)).Length),
+                numberOfPetals = 5 + rnd.Next(0, 20),
+                type = rnd.Next(0, 2) == 0 ? FlowersType.домашние : FlowersType.полевые
+            };
+        }
     }
-    public enum TreesType { coniferous, leafy };
+    public enum TreesType { хвойное, листовое };
     //Деревья
     public class Trees : Plants
     {
-        public float height = 0;
-        public TreesType type = TreesType.coniferous;
+        public TreesType type = TreesType.хвойное;
         public float radius = 0;
 
+        public override String GetInfo()
+        {
+            var str = "Я дерево";
+            str += base.GetInfo();
+            str += String.Format("\nТип дерева: {0}", this.type);
+            str += String.Format("\nРадиус: {0}", this.radius);
+            return str;
+        }
+
+        public static Trees Generate()
+        {
+            return new Trees
+            {
+                radius = 5 + rnd.Next(0, 20),
+                type = rnd.Next(0, 2) == 0 ? TreesType.хвойное : TreesType.листовое
+            };
+        }
     }
     //Кустарники
     public class Shrubs : Plants
     {
-        public bool availabilityOfColors = false;
-        public int NumberOfBranches = 0;
+        public bool availabilityOfFlowers = false;
+        public int numberOfBranches = 0;
 
+        public override String GetInfo()
+        {
+            var str = "Я кустарник";
+            str += base.GetInfo();
+            str += String.Format("\nНаличие цветков: {0}", this.availabilityOfFlowers);
+            str += String.Format("\nКол-во веточек: {0}", this.numberOfBranches);
+            return str;
+        }
+
+        public static Shrubs Generate()
+        {
+            return new Shrubs
+            {
+                numberOfBranches = 5 + rnd.Next(0, 20),
+                availabilityOfFlowers = rnd.Next(0, 2) == 0
+            };
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace Laboratornay_4
             var rnd = new Random();
             for (var i = 0; i < 10; ++i)
             {
-                switch (rnd.Next() % 3) // генерирую случайное число от 0 до 2 (ну остаток от деления на 3)
+                switch (rnd.Next() % 3) // генерирую случайное число от 0 до 2 ( остаток от деления на 3)
                 {
                     case 0:
                         this.plantsList.Add(Flowers.Generate());
@@ -31,13 +31,12 @@ namespace Laboratornay_4
                     case 2:
                         this.plantsList.Add(Shrubs.Generate());
                         break;
-                        // появление других чисел маловероятно
                 }
             }
             ShowInfo();
         }
 
-        // функция выводит информацию о количестве фруктов на форму
+        // функция выводит информацию о количестве растений на форму
         private void ShowInfo()
         {
             // Заведем счетчики под каждый тип
@@ -64,6 +63,8 @@ namespace Laboratornay_4
             // Обновим информацию о количестве каждого типа объектов на форме
             txtInfo.Text = $"Цветы: {flowersCount}, Деревья: {treesCount}, Кустарники: {shrubsCount}";
         }
+
+
 
         private void btnGet_Click(object sender, EventArgs e)
         {

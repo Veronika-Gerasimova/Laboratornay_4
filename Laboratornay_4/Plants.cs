@@ -10,11 +10,10 @@ namespace Laboratornay_4
     {
         public static Random rnd = new Random();
         public int height = 0;
-        //virtual для того чтобы функцию можно было переопределить
-        // в классах наследниках
+        //virtual для того чтобы функцию можно было переопределить в классах наследниках
         public virtual String GetInfo()
         {
-            var str = String.Format("\nВысота: {0}", this.height);
+            var str = String.Format("\nВысота: {0} ", this.height);
             return str;
         }
     }
@@ -24,16 +23,16 @@ namespace Laboratornay_4
     public class Flowers : Plants
     {
         public FlowersType type = FlowersType.домашние;
-        public int numberOfPetals = 0;
+        public int numberOfPetals = 0; //количество лепестков
         public FlowersColors colors = FlowersColors.чёрный;
 
         public override String GetInfo()
         {
-            var str = "Я цветок";
+            var str = "Я цветок ";
             str += base.GetInfo();
-            str += String.Format("\nТип цветов: {0}", this.type);
-            str += String.Format("\nЦвет: {0}", this.colors);
-            str += String.Format("\nКол-во лепестков: {0}", this.numberOfPetals);
+            str += String.Format("\nТип цветов: {0} ", this.type);
+            str += String.Format("\nЦвет: {0} ", this.colors);
+            str += String.Format("\nКол-во лепестков: {0} ", this.numberOfPetals);
             return str;
         }
 
@@ -43,7 +42,8 @@ namespace Laboratornay_4
             {
                 colors = (FlowersColors)rnd.Next(0, Enum.GetValues(typeof(FlowersColors)).Length),
                 numberOfPetals = 5 + rnd.Next(0, 20),
-                type = rnd.Next(0, 2) == 0 ? FlowersType.домашние : FlowersType.полевые
+                type = rnd.Next(0, 2) == 0 ? FlowersType.домашние : FlowersType.полевые,
+                height = rnd.Next(5, 40)
             };
         }
     }
@@ -52,14 +52,14 @@ namespace Laboratornay_4
     public class Trees : Plants
     {
         public TreesType type = TreesType.хвойное;
-        public float radius = 0;
+        public float radius = 0; //радиус
 
         public override String GetInfo()
         {
-            var str = "Я дерево";
+            var str = "Я дерево ";
             str += base.GetInfo();
-            str += String.Format("\nТип дерева: {0}", this.type);
-            str += String.Format("\nРадиус: {0}", this.radius);
+            str += String.Format("\nТип дерева: {0} ", this.type);
+            str += String.Format("\nРадиус: {0} ", this.radius);
             return str;
         }
 
@@ -68,22 +68,23 @@ namespace Laboratornay_4
             return new Trees
             {
                 radius = 5 + rnd.Next(0, 20),
-                type = rnd.Next(0, 2) == 0 ? TreesType.хвойное : TreesType.листовое
+                type = rnd.Next(0, 2) == 0 ? TreesType.хвойное : TreesType.листовое,
+                height = rnd.Next(100, 1001)
             };
         }
     }
     //Кустарники
     public class Shrubs : Plants
     {
-        public bool availabilityOfFlowers = false;
-        public int numberOfBranches = 0;
+        public bool availabilityOfFlowers = false; //наличие цветов
+        public int numberOfBranches = 0; //кол-во веточек
 
         public override String GetInfo()
         {
-            var str = "Я кустарник";
+            var str = "Я кустарник ";
             str += base.GetInfo();
-            str += String.Format("\nНаличие цветков: {0}", this.availabilityOfFlowers);
-            str += String.Format("\nКол-во веточек: {0}", this.numberOfBranches);
+            str += String.Format("\nНаличие цветков: {0} ", this.availabilityOfFlowers);
+            str += String.Format("\nКол-во веточек: {0} ", this.numberOfBranches);
             return str;
         }
 
@@ -92,7 +93,8 @@ namespace Laboratornay_4
             return new Shrubs
             {
                 numberOfBranches = 5 + rnd.Next(0, 20),
-                availabilityOfFlowers = rnd.Next(0, 2) == 0
+                availabilityOfFlowers = rnd.Next(0, 2) == 0,
+                height = rnd.Next(100, 300)
             };
         }
     }
